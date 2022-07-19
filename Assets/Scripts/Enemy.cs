@@ -15,6 +15,13 @@ public class Enemy : MonoBehaviour {
     private int healthPoints;
     [SerializeField]
     private int rewardAmount;
+    [SerializeField]
+    private float enemyHealt;
+    [SerializeField]
+    private float movementSpeed;
+    private GameObject targetTile;
+    private int killRoward;//the amout of money the player gets when this enemy
+    private int damage;// the amount of damage the enemy does when it reaches the end
 
     private int target = 0;
     private Transform enemy;
@@ -103,5 +110,23 @@ public class Enemy : MonoBehaviour {
         GameManager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Death);
         GameManager.Instance.AddMoney(rewardAmount);
         GameManager.Instance.isWaveOver();
+    }
+    public void TakeDamage(float amount)
+    {
+        enemyHealt -= amount;
+        if (enemyHealt <= 0)
+        {
+            Die();
+        }
+
+    }
+    private void Die()
+    {
+        Enemies.enemies.Remove(gameObject);
+        Destroy(transform.gameObject);
+    }
+    private void moveEnemy()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetTile.transform.position, movementSpeed * Time.deltaTime);
     }
 }

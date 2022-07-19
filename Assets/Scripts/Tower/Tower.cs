@@ -5,12 +5,12 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
     [SerializeField]
-    private float timeBetweenAttacks;   //AKA - Attack Speed
+    public float timeBetweenAttacks;   //AKA - Attack Speed
     [SerializeField]
     private float attackRange;          //AKA - Attack Radius
     [SerializeField]
     private Projectile projectile;      //Type of Projectile
-    private Enemy targetEnemy = null;
+    public Enemy targetEnemy = null;
     private float attackCounter;
     private bool isAttacking = false;
 
@@ -142,4 +142,5 @@ public class Tower : MonoBehaviour {
         }
         return closestEnemy;
     }
+
 }
